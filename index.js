@@ -1,7 +1,6 @@
-// Script ////////////////////////////////////////////////////////////////////////////
-// Copyright (c) 2012-2013 Kaerus (kaerus.com), Anders Elo <anders @ kaerus com>.
-var Promise = require('micropromise'),
-    Ajax = require('ajax');
+/*global require, module, window*/
+var Promise = require('kaerus-component-uP'),
+    Ajax = require('kaerus-component-ajax');
 
 var global = window;
 
@@ -10,7 +9,7 @@ var cached = {};
 function Script(file,options) {
     var loaded = cached[file],
         source, stamp = '',
-        head, child, promise;
+        script, head, child, promise;
 
     options = options ? options : {};
 
@@ -97,7 +96,7 @@ function Script(file,options) {
 var SCRIPT = /<script\b(.*)[^>]*>([\s\S]*?)<\/script>/gm;
 
 Script.parse = function(html){
-    var script, scr, type;
+    var script, src, type;
 
     while ((script = SCRIPT.exec(html))) {
         if((src = script[1].match(/src=\"(.+)\"/))) {
